@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import Header from './partials/header';
 
-class Feature extends Component {
+class Posts extends Component {
   componentWillMount() {
     this.props.fetchMessage();
   }
 
+  componentDidMount() {
+    document.body.classList.remove('main-page');
+  }
+
   render() {
     return (
-      <div>{this.props.message}</div>
+      <div>
+        <Header />
+        {this.props.message}
+      </div>
     );
   }
 }
@@ -18,4 +26,4 @@ function mapStateToProps(state) {
   return { message: state.auth.message };
 }
 
-export default connect(mapStateToProps, actions)(Feature);
+export default connect(mapStateToProps, actions)(Posts);

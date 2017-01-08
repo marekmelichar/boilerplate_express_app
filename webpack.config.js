@@ -23,6 +23,15 @@ module.exports = {
       exclude: /node_modules/,
       loader: 'babel'
     }]
+    // rules: [
+    //   {
+    //     use: 'babel-loader',
+    //     test: /\.js$/
+    //   }, {
+    //     use: ['style-loader', 'css-loader'],
+    //     test: /\.css$/
+    //   }
+    // ]
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -32,6 +41,7 @@ module.exports = {
     contentBase: './'
   },
   plugins: [
+      // new ExtractTextPlugin("./style/style.css")
         // //for production
         new webpack.DefinePlugin({
           'process.env': {

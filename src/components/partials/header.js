@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router';
 
@@ -7,7 +8,7 @@ class Header extends Component {
     if (this.props.authenticated) {
       // show a link to sign out
       return <li className="nav-item">
-        <Link className="nav-link" to="/signout">Sign Out</Link>
+        <Link className="nav-link" to="/" onClick={() => this.props.signoutUser()}>Sign Out</Link>
       </li>
     } else {
       // show a link to sign in or sign up
@@ -25,7 +26,7 @@ class Header extends Component {
   render() {
     return (
       <nav className="navbar navbar-light">
-        <Link to="/" className="navbar-brand">Redux Auth</Link>
+        <Link to="/posts" className="navbar-brand">Redux Auth</Link>
         <ul className="nav navbar-nav">
           {this.renderLinks()}
         </ul>
@@ -40,4 +41,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);

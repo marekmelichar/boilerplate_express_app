@@ -7,8 +7,8 @@ import {
   FETCH_MESSAGE
 } from './types';
 
-// const ROOT_URL = 'http://localhost:3090';
-const ROOT_URL = 'https://authmm.herokuapp.com';
+const ROOT_URL = 'http://localhost:3090';
+// const ROOT_URL = 'https://authmm.herokuapp.com';
 
 export function signinUser({ email, password }) {
   return function(dispatch) {
@@ -21,7 +21,7 @@ export function signinUser({ email, password }) {
         // - Save the JWT token
         localStorage.setItem('token', response.data.token);
         // - redirect to the route '/feature'
-        browserHistory.push('/feature');
+        browserHistory.push('/posts');
       })
       .catch(() => {
         // If request is bad...
@@ -37,7 +37,7 @@ export function signupUser({ email, password }) {
       .then(response => {
         dispatch({ type: AUTH_USER });
         localStorage.setItem('token', response.data.token);
-        browserHistory.push('/feature');
+        browserHistory.push('/posts');
       })
       .catch(response => dispatch(authError(response.data.error)));
   }
@@ -58,7 +58,7 @@ export function signoutUser() {
 
 export function fetchMessage() {
   return function(dispatch) {
-    axios.get(ROOT_URL, {
+    axios.get(`${ROOT_URL}/message`, {
       headers: { authorization: localStorage.getItem('token') }
     })
       .then(response => {
